@@ -1,4 +1,4 @@
-# Lede 2025 Storytelling: Create SVG with D3
+# Lede 2026 Storytelling: Create SVG with D3
 
 An 8-step guide to create a simple SVG graphic with D3.js
 
@@ -26,13 +26,16 @@ An 8-step guide to create a simple SVG graphic with D3.js
     ```
 
 
-3. Add data variables. For this demo, we will use Jeff Bezos' wedding cost data.
+3. Add data variables. For this demo, we will use the wedding cost data.
     - You will be doing this inside the `script` tag inside `head`.
 
 ```
 // unit in million
-const bezosCost = 56, bezosWealth = 236000;
-const averageCost = 0.033, averageWealth = 0.1929;
+const weddingCostData = {
+    swift: {wedding: 50, wealth: 2000},
+    bezos: {wedding: 56, wealth: 236000},
+    american: {wedding: 0.036, wealth: 1.06}
+}
 
 ```
 
@@ -42,7 +45,9 @@ const averageCost = 0.033, averageWealth = 0.1929;
 
 ```
 // let's assume we want the max radius of the circles to be 100
-const scaleRadius = d3.scaleSqrt().domain([0, bezosWealth]).range([0, 100]);
+const scaleRadius = d3.scaleSqrt()
+    .domain([0, weddingCostData.bezos.wealth])
+    .range([0, 100]);
 
 ```
 
@@ -68,12 +73,12 @@ const scaleRadius = d3.scaleSqrt().domain([0, bezosWealth]).range([0, 100]);
         - [Text](https://www.w3schools.com/graphics/svg_text.asp)
         - ... (any other SVG elements)
 
-    - This code example uses a rectangle.
+    - This code example uses a circle.
 
         ```
-        const circles = myChart
+        const circlesWealth = myChart
             .selectAll('circle')
-            .data([circleData])
+            .data([weddingCostData.swift.wealth, weddingCostData.bezos.wealth, weddingCostData.american.wealth])
             .join('circle');
         ```
 
@@ -85,8 +90,8 @@ const scaleRadius = d3.scaleSqrt().domain([0, bezosWealth]).range([0, 100]);
     ```
     // with SVG circle-specific attributes
 
-    circles
-        .attr('cx', xPos)
+    circlesWealth
+        .attr('cx', (d,i)=> (i+1)*200)
         .attr('cy', 100)
         .attr('r', (d) => scaleRadius(d))
 
@@ -98,9 +103,7 @@ const scaleRadius = d3.scaleSqrt().domain([0, bezosWealth]).range([0, 100]);
     // this creates alternating colors based on the index of the circle
 
     circles
-        .style('fill', function(d,i) {
-          return i%2 == 0 ? '#ccc' : 'red'
-        })
+        .style('fill', '#ccc')
 
     ```
 
@@ -109,7 +112,8 @@ You're done. Good job.
 You can play around different SVG shapes/text/path, different ways of encoding your data...  
 - Use squares, bars instead of circles? 
 - Encode data as colors instead of shapes? 
-- Use a different dataset to create a different effect? 
+- Use a different dataset?
+- Can you make your graphic responsive? 
 
 ... and don't forget to publish your page.
 
