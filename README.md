@@ -22,7 +22,7 @@ An 8-step guide to create a simple SVG graphic with D3.js
 
 
     ```
-    https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js
+    https://cdn.jsdelivr.net/npm/d3@7
     ```
 
 
@@ -32,9 +32,9 @@ An 8-step guide to create a simple SVG graphic with D3.js
 ```
 // unit in million
 const weddingCostData = {
-    swift: {wedding: 50, wealth: 2000},
-    bezos: {wedding: 56, wealth: 236000},
-    american: {wedding: 0.036, wealth: 1.06}
+    swift: {wedding: 50, wealth: 2000, share: 0.025},
+    bezos: {wedding: 56, wealth: 236000, share: 0.00024},
+    american: {wedding: 0.036, wealth: 1.06, share: 0.034}
 }
 
 ```
@@ -91,7 +91,7 @@ const scaleRadius = d3.scaleSqrt()
     // with SVG circle-specific attributes
 
     circlesWealth
-        .attr('cx', (d,i)=> (i+1)*200)
+        .attr('cx', (d,i)=> (i+0.5)*200)
         .attr('cy', 100)
         .attr('r', (d) => scaleRadius(d))
 
@@ -100,9 +100,8 @@ const scaleRadius = d3.scaleSqrt()
 8. Change the style attributes of the SVG shapes to achieve desired effects
 
     ```
-    // this creates alternating colors based on the index of the circle
-
-    circles
+    
+    circlesWealth
         .style('fill', '#ccc')
 
     ```
@@ -117,6 +116,11 @@ You can play around different SVG shapes/text/path, different ways of encoding y
 
 ... and don't forget to publish your page.
 
+## Two extras
+
+1. What we just created works. But it's not ideal. How do we make these circles look like [the handcrafted SVGs](https://codepen.io/zhoyoyo/pen/wBKBPzQ) we created before? 
+
+2. Instead of manually creating data inside Javascript, can we ask Javascript to read an external csv file? 
 
 --- 
 

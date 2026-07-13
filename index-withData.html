@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+
+    <!-- some basic stuff  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVG with D3</title>
+
+    <!-- 
+      add your stylesheet 
+      base.css loads the templated css that should not be changed
+      you can tweak your own css in custom.css and it will override base.css
+      WARNING: the order of the stylesheets matters
+    -->
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="custom.css">
+
+    <!-- Step 2: add your d3 script below -->
+     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+  </head>
+  <body>
+    <h1>How much does a wedding cost?</h1>
+    <p>Comparing 
+      <span style="font-weight: bold;color: red;">wedding costs</span> 
+      to <span style="font-weight: bold;color: grey;">the wealth</span> of Taylor Swift, Jeff Bezos, and the average American.</p>
+    <div id="my-svg-chart"></div>
+
+    <!-- your JS code that uses d3 to manipulate data -->
+    <script type="module">
+
+      // Step 3: load external data
+      const data = await d3.csv('data/wedding-data.csv');
+        
+      // Continue with your step 4-8...
+        
+
+      
+
+
+    </script>
+
+  </body>
+</html>
